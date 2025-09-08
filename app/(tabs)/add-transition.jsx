@@ -13,7 +13,7 @@ import {
 export default function AddTransitions() {
   const initialForm = {
     description: "Descrição ",
-    value: 1,
+    value: 0,
     date: "01/01/2000",
     category: "Renda",
   };
@@ -23,6 +23,13 @@ export default function AddTransitions() {
   const addTransition = () => {
     Alert.alert("Adicionar");
   };
+
+  const handleCurrencyChange = (text) => {
+    const formattedValue = text.replace(/\D/g,"");
+    const numberValue    = formattedValue ? (parseFloat(formattedValue) / 100) : 0;
+    
+    setForm({ ...form, value: numberValue });
+  }
 
   return (
     <View style={globalStyles.screenContainer}>
@@ -45,10 +52,11 @@ export default function AddTransitions() {
             <Text style={globalStyles.inputLabel}>Valor</Text>
             <TextInput
               style={globalStyles.input}
-              value={form.value}
-              onChangeText={(text) => {
-                setForm({ ...form, value: text });
-              }}
+              value={form.value.toLocaleString("pt-BR",{
+                style: "currency",
+                currency: "BRL"
+              })}
+              onChangeText={handleCurrencyChange}
               keyboardType="numeric"
             />
           </View>

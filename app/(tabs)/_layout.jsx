@@ -13,7 +13,7 @@ export default function LayoutTabs() {
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.inactive,
         tabBarStyle: {
-          height: 80,
+          height: 100, // ou 120
           paddingTop: 10,
           backgroundColor: colors.background,
         },
