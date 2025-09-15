@@ -1,5 +1,5 @@
-import { colors } from "@/constants/color";
 import { StyleSheet, Text, TouchableHighlight } from "react-native";
+import { colors } from "../../constants/color";
 
 export default function Button({ children, onPress }) {
   return (

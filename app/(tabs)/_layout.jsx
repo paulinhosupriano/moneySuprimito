@@ -1,7 +1,7 @@
-import { colors } from "@/constants/color";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { colors } from "../../constants/color";
 
 export default function LayoutTabs() {
   return (

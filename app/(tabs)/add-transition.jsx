@@ -1,5 +1,3 @@
-import Button from "@/components/Button/Index";
-import { globalStyles } from "@/styles/globalStyles";
 import { useState } from "react";
 import {
   Alert,
@@ -7,14 +5,17 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
+import Button from "../../components/Button/Index";
+import { globalStyles } from "../../styles/globalStyles";
 
 export default function AddTransitions() {
   const initialForm = {
     description: "Descrição ",
     value: 0,
-    date: "01/01/2000",
+    date: new Date(),
     category: "Renda",
   };
 
@@ -25,11 +26,15 @@ export default function AddTransitions() {
   };
 
   const handleCurrencyChange = (text) => {
-    const formattedValue = text.replace(/\D/g,"");
-    const numberValue    = formattedValue ? (parseFloat(formattedValue) / 100) : 0;
-    
+    const formattedValue = text.replace(/\D/g, "");
+    const numberValue = formattedValue ? parseFloat(formattedValue) / 100 : 0;
+
     setForm({ ...form, value: numberValue });
-  }
+  };
+
+  const handleDateCurrent = (event, selected) => {
+    Alert.alert("click")
+  };
 
   return (
     <View style={globalStyles.screenContainer}>
@@ -52,9 +57,9 @@ export default function AddTransitions() {
             <Text style={globalStyles.inputLabel}>Valor</Text>
             <TextInput
               style={globalStyles.input}
-              value={form.value.toLocaleString("pt-BR",{
+              value={form.value.toLocaleString("pt-BR", {
                 style: "currency",
-                currency: "BRL"
+                currency: "BRL",
               })}
               onChangeText={handleCurrencyChange}
               keyboardType="numeric"
@@ -64,13 +69,19 @@ export default function AddTransitions() {
           {/* Data */}
           <View>
             <Text style={globalStyles.inputLabel}>Data</Text>
-            <TextInput
-              style={globalStyles.input}
-              value={form.date}
-              onChangeText={(date) => {
-                setForm({ ...form, date: date });
-              }}
-            />
+
+            <TouchableOpacity 
+              onPress={handleDateCurrent}
+            >
+              <TextInput
+                style={globalStyles.input}
+                value={form.date}
+                onChangeText={(date) => {
+                  setForm({ ...form, date: date });
+                }}
+                editable={false}
+              />
+            </TouchableOpacity>
           </View>
 
           {/* Categoria */}
